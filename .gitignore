@@ -1,0 +1,16 @@
+/.idea/
+
+/common/.idea/
+/common/Cargo.lock
+/common/target/
+
+/delprotect-um/.idea/
+/delprotect-um/Cargo.lock
+/delprotect-um/target/
+
+/delprotect-km/.idea/
+/delprotect-km/Cargo.lock
+/delprotect-km/target/
+/delprotect-km/DriverCertificate.cer
+
+/output/

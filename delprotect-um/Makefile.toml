@@ -1,0 +1,36 @@
+[env]
+EXE_NAME = "delprotect-client"
+OUTPUT_PATH = "..\\output"
+
+[env.development]
+TARGET_PATH = "target\\debug"
+
+[env.production]
+TARGET_PATH = "target\\release"
+BUILD_FLAGS = "--release"
+
+[tasks.format]
+command = "cargo"
+args = ["fmt"]
+toolchain = "nightly"
+
+[tasks.build-client]
+dependencies = ["format"]
+script = [
+    "cargo b %BUILD_FLAGS%"
+]
+
+[tasks.copy]
+script = [
+    "IF not exist %OUTPUT_PATH% (mkdir %OUTPUT_PATH%)",
+    "COPY %TARGET_PATH%\\%EXE_NAME%.exe %OUTPUT_PATH%",
+]
+
+[tasks.all]
+dependencies = ["build-client", "copy"]
+
+[tasks.rebuild]
+script = [
+    "cargo clean",
+    "cargo make all"
+]

@@ -1,0 +1,30 @@
+[package]
+name = "delprotect"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[lib]
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+km-api-sys = { git = "https://github.com/radkum/windows-kernel-rs.git", package = "km-api-sys" }
+kernel-string = { git = "https://github.com/radkum/windows-kernel-rs.git", package = "kernel-string" }
+kernel-macros = { git = "https://github.com/radkum/windows-kernel-rs.git", package = "kernel-macros" }
+kernel-fast-mutex = { git = "https://github.com/radkum/windows-kernel-rs.git", package = "kernel-fast-mutex" }
+kernel-init = { git = "https://github.com/radkum/windows-kernel-rs.git", package = "kernel-init" }
+common = { path = "../common" }
+log = "0.4.20"
+kernel-log = "0.1.2"
+
+[dependencies.winapi]
+git = "https://github.com/Trantect/winapi-rs.git"
+branch = "feature/km"
+features = [
+    "wdm",
+    "ntstatus",
+]
+
+[build-dependencies]
+winreg = "0.7.0"
