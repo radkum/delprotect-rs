@@ -1,23 +1,28 @@
-# SysMon-rs
+# DelProtect-rs
 
-Rust driver based on https://github.com/zodiacon/windowskernelprogrammingbook/tree/master/chapter09/SysMon
+Rust minifilter based on https://github.com/zodiacon/windowskernelprogrammingbook/tree/master/chapter09/SysMon
 
 ###Directory hierarchy
-**sysmon-km** - driver project which gather particular events from system
+**delprotect-km** - minifilter project which gather allows to block particular deletes
 
-**sysmon-um** - user mode program to read and display events saved by driver
+**delprotect-um** - user mode program to configure minifilter
 
-**common** - shared info between driver and client, like format of data send from driver to client
+**common** - shared info between driver and client, like ioctl codes
 
 ### How to use
-Installing (with admin rights):
-> sc create sysmon type=kernel binPath=<driver.sys path>
+#### Installing (with admin rights):
+Click right mouse button on DelProtect.inf and choose install or type
+> RUNDLL32.EXE SETUPAPI.DLL,InstallHinfSection DefaultInstall 132 C:\VsExclude\kernel\delprotect\delprotect.inf
 
-Start: 
-> sc start sysmon
+#### Start: 
+> fltmc load minifilter
 
-Read events saved in driver:
-> sysmon-client.exe
+#### Setup minifilter:
+To block deletes from cmd.exe
+> delprotect-client.exe add cmd.exe
 
-Stop:
-> sc stop sysmon
+To clear list of prevented deletes
+> delprotect-client.exe clear
+
+#### Stop:
+> fltmc unload minifilter
